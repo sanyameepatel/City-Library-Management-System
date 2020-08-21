@@ -1,0 +1,37 @@
+<html>
+    <head><h1>Welcome to the City Library </h1></head>
+	</body>
+        <pre><a href="/reader/{{ reader_id }}/reserve_document/">Reserve More Books</a></pre>
+        <pre><a href="/reader/{{ reader_id }}/">Go Back to Main Menu</a></pre>
+        <pre><a href="/">Quit</a></pre>
+        <br><br>
+        {% if reserved_copy %}
+            <table>
+                <tr>
+                    <td>Document Reserved.</td>
+                </tr>
+                <tr>
+                    <td>Details :</td>
+                </tr>
+                <tr>
+                    <td>Reservation Number : {{ reserved_copy.resnumber }}</td>
+                </tr>
+                <tr>
+                    <td>Reader Name : {{ reserved_copy.readerid.rname }}</td>
+                </tr>
+                <tr>
+                    <td>Document Title : {{ reserved_copy.copyid.docid.title }}</td>
+                </tr>
+                <tr>
+                    <td>Copy Number : {{ reserved_copy.copyid.copyno }}</td>
+                </tr>
+                <tr>
+                    <td>Copy Position : {{ reserved_copy.copyid.position }}</td>
+                </tr>
+                <tr>
+                    <td>Library Branch Name : {{ reserved_copy.copyid.libid.lname }}</td>
+                </tr>
+            </table>
+        {% endif %}
+	</body>
+</html>

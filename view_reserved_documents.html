@@ -1,0 +1,32 @@
+<html>
+    <head><h1>Welcome to the City Library </h1></head>
+	</body>
+        {% if rsv_docs %}
+                <h1>Documents Reserved by {{ rsv_docs.0.readerid.rname}} are : </h1>
+            <table border="1">
+            <tr>
+                    <td>Reservation Number</td>
+                    <td>Reader Name</td>
+                    <td>Document Title</td>
+                    <td>Copy Number</td>
+                    <td>Copy Position</td>
+                    <td>Library Branch Name</td>
+                    <td>Cancel Reservation</td>
+                    <td>Borrow this Copy</td>
+                </tr>
+            {% for reserved_copy in rsv_docs %}
+                <tr>
+                    <td>{{ reserved_copy.resnumber }}</td>
+                    <td>{{ reserved_copy.readerid.rname }}</td>
+                    <td>{{ reserved_copy.copyid.docid.title }}</td>
+                    <td>{{ reserved_copy.copyid.copyno }}</td>
+                    <td>{{ reserved_copy.copyid.position }}</td>
+                    <td>{{ reserved_copy.copyid.libid.lname }}</td>
+                    <td><a href="/reader/{{ reader_id }}/cancel_reservation/{{ reserved_copy.resnumber }}/">Cancel Reservation</a></td>
+                    <td><a href="/reader/{{ reader_id }}/borrow_reserve_copy/{{ reserved_copy.resnumber }}/{{ reserved_copy.copyid.copyid }}/">Borrow this Copy</a></td>
+                </tr>
+            {% endfor %}
+            </table>
+        {% endif %}
+	</body>
+</html>

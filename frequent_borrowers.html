@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Frequent Borrowers</title>
+</head>
+<body>
+    <form method="post">
+            {% csrf_token %}
+            Branches : <select name="branch_select">
+            {% for b in branches %}
+                <option value="{{ b.libid }}">{{ b.lname }}</option>
+            {% endfor %}
+            </select>
+        {% if top_borrowers %}
+            {% for bor in top_borrowers %}
+                <br>{{ bor.readerid.rname }}<br>
+            {% endfor %}
+        {% endif %}
+    </form>
+</body>
+</html>

@@ -1,0 +1,39 @@
+"{% if reader %}
+<html>
+    <head><h1>Welcome to the City Library : {{ reader.rname }}</h1></head>
+	</body>
+        <table>
+                        <tr>
+                            <td>Reader Operations:</td>
+                        </tr>
+                        <tr>
+                            <td><a href="/reader/{{ reader.readerid }}/search_document/">Search Document</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/reader/{{ reader.readerid }}/borrow_document/">Borrow Document</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/reader/{{ reader.readerid }}/return_document">Return Borrowed Documents</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/reader/{{ reader.readerid }}/reserve_document/">Reserve Document</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/reader/{{ reader.readerid }}/view_borrowed_documents/">Check fine on Document Borrowed</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/reader/{{ reader.readerid }}/view_reserved_documents/">View Reserved Documents and its Status</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/reader/{{ reader.readerid }}/publisher_documents/">View Documents by a Publisher</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/">Quit</a></td>
+                        </tr>
+                    </table>
+        {% else %}
+            <h2> No Reader Found.</h2>
+	</body>
+</html>
+
+    {% endif %}

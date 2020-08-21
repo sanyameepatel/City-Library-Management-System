@@ -1,0 +1,34 @@
+<html>
+    <head><h1>Welcome to the City Library </h1></head>
+	<body>
+        <pre><a href="/reader/{{ reader_id }}/">Go Back to Main Menu</a></pre>
+        <pre><a href="/">Quit</a></pre>
+        {% if brw_docs %}
+                <h1>Documents Borrowed by {{ brw_docs.0.readerid.rname}} are : </h1>
+            <table border="1">
+            <tr>
+                    <td>Borrow Number</td>
+                    <td>Reader Name</td>
+                    <td>Document Title</td>
+                    <td>Copy Number</td>
+                    <td>Copy Position</td>
+                    <td>Library Branch Name</td>
+                    <td>Return this Book</td>
+                    <td>Check Fine</td>
+                </tr>
+            {% for reserved_copy in brw_docs %}
+                <tr>
+                    <td>{{ reserved_copy.bornumber }}</td>
+                    <td>{{ reserved_copy.readerid.rname }}</td>
+                    <td>{{ reserved_copy.copyid.docid.title }}</td>
+                    <td>{{ reserved_copy.copyid.copyno }}</td>
+                    <td>{{ reserved_copy.copyid.position }}</td>
+                    <td>{{ reserved_copy.copyid.libid.lname }}</td>
+                    <td><a href="/reader/{{ reserved_copy.readerid.readerid }}/return_document_copy/{{ reserved_copy.bornumber }}/{{ reserved_copy.copyid.copyid }}/">Return this Book</a></td>
+                    <td><a href="/reader/{{ reserved_copy.readerid.readerid }}/check_fine/{{ reserved_copy.bornumber }}/">Check Fine</a></td>
+                </tr>
+            {% endfor %}
+            </table>
+        {% endif %}
+    </body>
+</html>

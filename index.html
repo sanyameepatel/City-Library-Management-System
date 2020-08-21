@@ -1,0 +1,21 @@
+{% load static %}
+<html>
+<head><h1>Welcome to the City Library</h1></head>
+	<body>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/util.css' %}">
+        <form method="post">
+            <table>
+            <tr>
+                <td><h3>Please Select are you a Reader or Admin :</h3></td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a href="./reader">Reader</a></h3>
+                </td>
+                <td><h3><a href="./admin">Admin</a></h3></td>
+            </tr>
+        </table>
+        </form>
+	</body>
+</html>

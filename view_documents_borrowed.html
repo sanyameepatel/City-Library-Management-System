@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <pre><a href="/reader/{{ reader_id }}/">Go Back to Main Menu</a></pre>
+        <pre><a href="/">Quit</a></pre>
+        <form method="post">
+            {% csrf_token %}
+            Borrowed Documents : <select name="borrow_id">
+            {% for b in borrow  %}
+                <option value="{{ b.bornumber }}">{{ b.copyid.docid.title }}</option>
+            {% endfor %}
+            </select>
+            <br><br><input type="submit">
+        </form>
+        {% if borrow_date %}
+        <table>
+                <tr>
+                    <td>Details :</td>
+                </tr>
+                <tr>
+                    <td>Borrow Number : {{ borrow_date.bornumber }}</td>
+                </tr>
+                <tr>
+                    <td>Reader Name : {{ borrow_date.readerid.rname }}</td>
+                </tr>
+                <tr>
+                    <td>Document Title : {{ borrow_date.copyid.docid.title }}</td>
+                </tr>
+                <tr>
+                    <td>Copy Number : {{ borrow_date.copyid.copyno }}</td>
+                </tr>
+                <tr>
+                    <td>Copy Position : {{ borrow_date.copyid.position }}</td>
+                </tr>
+                <tr>
+                    <td>Library Branch Name : {{ borrow_date.copyid.libid.lname }}</td>
+                </tr>
+                <tr>
+                    <td>Borrow Date : {{ borrow_date.bdtime }}</td>
+                </tr>
+                <tr>
+                    <td>Number of days Borrowed : {{ no_of_days }}</td>
+                </tr>
+                <tr>
+                    <td>Fine : {{ delta }}</td>
+                </tr>
+            </table>
+                <br>
+    {% endif %}
+</body>
+</html>

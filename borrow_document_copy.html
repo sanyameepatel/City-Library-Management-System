@@ -1,0 +1,36 @@
+<html>
+    <head><h1>Welcome to the City Library </h1></head>
+	</body>
+        <pre><a href="/reader/{{ reader_id }}/borrow_document/">Borrow More Documents</a></pre>
+        <pre><a href="/reader/{{ reader_id }}/">Go Back to Main Menu</a></pre>
+        <pre><a href="/">Quit</a></pre>
+        {% if borrowed_copy %}
+            <table>
+                <tr>
+                    <td>Document Borrowed.</td>
+                </tr>
+                <tr>
+                    <td>Details :</td>
+                </tr>
+                <tr>
+                    <td>Reservation Number : {{ borrowed_copy.bornumber }}</td>
+                </tr>
+                <tr>
+                    <td>Reader Name : {{ borrowed_copy.readerid.rname }}</td>
+                </tr>
+                <tr>
+                    <td>Document Title : {{ borrowed_copy.copyid.docid.title }}</td>
+                </tr>
+                <tr>
+                    <td>Copy Number : {{ borrowed_copy.copyid.copyno }}</td>
+                </tr>
+                <tr>
+                    <td>Copy Position : {{ borrowed_copy.copyid.position }}</td>
+                </tr>
+                <tr>
+                    <td>Library Branch Name : {{ borrowed_copy.copyid.libid.lname }}</td>
+                </tr>
+            </table>
+        {% endif %}
+	</body>
+</html>

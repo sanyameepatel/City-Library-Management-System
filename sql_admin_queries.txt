@@ -1,0 +1,13 @@
+SQL Commands for Admin Queries
+
+Print top 10 most frequent borrowers in a branch and the number of books each has borrowed.
+SELECT r.rname,COUNT(cp.`docid_id`) AS Count_of_books FROM Citylibrary_borrows c, Citylibrary_reader r , Citylibrary_copy cp WHERE c.readerid_id=r.readerid AND c.copyid_id = cp.copyid AND cp.libid_id = 1 GROUP BY r.readerid LIMIT 10;
+
+Find the average fine paid per reader
+SELECT r.rname ,AVG(fine) FROM citylibrary_fine f ,citylibrary_borrows b , citylibrary_reader r WHERE f.`bornum_id`=b.`bornumber` AND r.`readerid`=b.`readerid_id` GROUP BY r.`readerid`;
+
+Print top 10 most borrowed books in a branch.
+SELECT DISTINCT(d.title) FROM citylibrary_document d , citylibrary_borrows b , citylibrary_copy c WHERE b.`copyid_id`=c.`copyid` AND c.`docid_id`=d.`docid` AND c.`libid_id` = 1 LIMIT 10;
+
+Print the 10 most popular books of the year.
+SELECT DISTINCT(d.title) , YEAR(b.`bdtime`) FROM citylibrary_document d , citylibrary_borrows b , citylibrary_copy c WHERE b.`copyid_id`=c.`copyid` AND c.`docid_id`=d.`docid` AND c.`libid_id` IN (SELECT libid FROM citylibrary_branch) AND YEAR(b.`bdtime`)= 2019 LIMIT 10;

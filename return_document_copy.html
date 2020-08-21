@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Return Document Copy</title>
+</head>
+<body>
+{% if doc %}
+    <h3>Document {{ doc.copyid.docid.title }} Returned at {{ doc.rdtime }}</h3>
+{% endif %}
+        <pre><a href="/reader/{{ reader_id }}/">Go Back to Main Menu</a></pre>
+        <pre><a href="/">Quit</a></pre>
+</body>
+</html>

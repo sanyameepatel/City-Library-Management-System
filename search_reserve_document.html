@@ -1,0 +1,49 @@
+<html>
+    <head><h1>Welcome to the City Library </h1></head>
+	</body>
+        <pre><a href="/reader/{{ reader_id }}/">Go Back to Main Menu</a></pre>
+        <pre><a href="/">Quit</a></pre>
+        <br>
+        <form method="post">
+            {% csrf_token %}
+            Branches : <select name="branch_select">
+            {% for b in branch %}
+                <option value="{{ b.libid }}">{{ b.lname }}</option>
+            {% endfor %}
+            </select>
+            <br><br>
+            Document : <select name="document_select">
+            {% for d in document %}
+                <option value="{{ d.docid }}">{{ d.title }}</option>
+            {% endfor %}
+            </select>
+            <br><br><input type="submit"><br><br>
+            {% if request.method == 'POST' %}
+                {% if document_copy %}
+                    <table border="1">
+                <tr>
+                        <td><h4 align="center">Document Name</h4></td>
+                        <td><h5 align="center">Copy Number</h5></td>
+                        <td><h5 align="center">Library Name</h5></td>
+                        <td><h5 align="center">Library Location</h5></td>
+                        <td><h5 align="center">Copy Location</h5></td>
+                        <td><h5 align="center">Reserve this Copy</h5></td>
+                    </tr>
+            {% for copy in document_copy %}
+                    <tr>
+                        <td><h4 align="center">{{ copy.docid.title }}</h4></td>
+                        <td><h5 align="center">{{ copy.copyno }}</h5></td>
+                        <td><h5 align="center">{{ copy.libid.lname }}</h5></td>
+                        <td><h5 align="center">{{ copy.libid.llocation }}</h5></td>
+                        <td><h5 align="center">{{ copy.position }}</h5></td>
+                        <td><h5 align="center"><a href="/reader/{{ reader_id }}/reserve_document_copy/{{ copy.copyid }}/">Reserve this Copy</a></h5></td>
+                    </tr>
+            {% endfor %}
+            </table>
+                {% else %}
+                    <h1>Document Not Found.</h1>
+                {% endif %}
+        {% endif %}
+        </form>
+	</body>
+</html>

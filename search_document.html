@@ -1,0 +1,43 @@
+<html>
+    <head><h1>Welcome to the City Library </h1></head>
+	</body>
+        <pre><a href="/reader/{{ reader_id }}/">Go Back to Main Menu</a></pre>
+        <pre><a href="/">Quit</a></pre>
+        <form method="post">
+            {% csrf_token %}
+            <table>
+            <tr>
+                <td><h3>Search Document :</h3></td>
+                <td><h3><input type="text" name="search" placeholder="Search a document by ID, title, or publisher name"></h3></td>
+            </tr>
+            <tr>
+                <td><br><input type="submit"></td>
+            </tr>
+        </table>
+        </form>
+        {% if request.method == 'POST' %}
+                {% if documents %}
+                    <table border="1">
+                    <tr>
+                                <td align="center">Document Name</td>
+                                <td align="center">Document id</td>
+                                <td align="center">Publisher Name</td>
+                                <td align="center">Reserve</td>
+                                <td align="center">Borrow</td>
+                    </tr>
+                    {% for document in documents %}
+                            <tr>
+                                <td align="center">{{ document.title }}</td>
+                                <td align="center">{{ document.docid }}</td>
+                                <td align="center">{{ document.publisherid.pubname }}</td>
+                                <td align="center"><a href="/reader/{{ reader_id }}/reserve_document/{{ document.docid }}/">Reserve</a></td>
+                                <td align="center"><a href="/reader/{{ reader_id }}/borrow_document/{{ document.docid }}/">Borrow</a></td>
+                            </tr>
+                    {% endfor %}
+                    </table>
+                {% else %}
+                    <h1>Document Not Found.</h1>
+                {% endif %}
+        {% endif %}
+	</body>
+</html>

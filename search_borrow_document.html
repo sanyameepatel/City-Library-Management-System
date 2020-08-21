@@ -1,0 +1,48 @@
+<html>
+    <head><h1>Welcome to the City Library </h1></head>
+	</body>
+        <pre><a href="/reader/{{ reader_id }}/">Go Back to Main Menu</a></pre>
+        <pre><a href="/">Quit</a></pre>
+        <form method="post">
+            {% csrf_token %}
+            Branches : <select name="branch_select">
+            {% for b in branch %}
+                <option value="{{ b.libid }}">{{ b.lname }}</option>
+            {% endfor %}
+            </select>
+            <br><br>
+            Document : <select name="document_select">
+            {% for d in document %}
+                <option value="{{ d.docid }}">{{ d.title }}</option>
+            {% endfor %}
+            </select>
+            <br><br><input type="submit"><br><br>
+            {% if request.method == 'POST' %}
+                {% if document_copy %}
+                    <table border="1">
+                    <tr>
+                        <td><h4>Document Name</h4></td>
+                        <td><h5>Copy Number</h5></td>
+                        <td><h5>Library Name</h5></td>
+                        <td><h5>Library Location</h5></td>
+                        <td><h5>Copy Location</h5></td>
+                        <td><h5>Borrow this Copy</h5></td>
+                    </tr>
+                    {% for copy in document_copy %}
+                    <tr>
+                        <td><h4>{{ copy.docid.title }}</h4></td>
+                        <td><h5>{{ copy.copyno }}</h5></td>
+                        <td><h5>{{ copy.libid.lname }}</h5></td>
+                        <td><h5>{{ copy.libid.llocation }}</h5></td>
+                        <td><h5>{{ copy.position }}</h5></td>
+                        <td><a href="/reader/{{ reader_id }}/borrow_document_copy/{{ copy.copyid }}/">Borrow this Copy</a></td>
+                    </tr>
+                    {% endfor %}
+                    </table>
+                {% else %}
+                    <h1>Document Not Found.</h1>
+                {% endif %}
+        {% endif %}
+        </form>
+	</body>
+</html>
